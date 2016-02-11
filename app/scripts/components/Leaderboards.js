@@ -6,6 +6,10 @@ export default class Leaderboards extends React.Component {
         this.props.changeSorting(newSorting);
     }
 
+    sortInfo(sortType) {
+        return (this.props.sortedBy === sortType) ? ' \u25bc' : '';
+    }
+
     render() {
         var users = this.props.data[0];
         if(this.props.sortedBy === 'alltime')
@@ -21,10 +25,10 @@ export default class Leaderboards extends React.Component {
                 <table class="table table-hover table-bordered">
                     <thead class="thead-inverse">
                         <tr>
-                            <th>ID</th>
-                            <th>User</th>
-                            <th onClick={this.changeSorting.bind(this, 'recent')}>Recent</th>
-                            <th onClick={this.changeSorting.bind(this, 'alltime')}>All time</th>
+                            <th class="col-md-1">ID</th>
+                            <th class="col-md-7">User</th>
+                            <th class="col-md-2" onClick={this.changeSorting.bind(this, 'recent')}>{'Recent' + this.sortInfo.call(this, 'recent')}</th>
+                            <th class="col-md-2" onClick={this.changeSorting.bind(this, 'alltime')}>All time{this.sortInfo.call(this, 'alltime')}</th>
                         </tr>
                     </thead>
                     <tbody>
